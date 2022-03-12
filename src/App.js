@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { auth, createFirebaseUser } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/users/user.actions";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/users/user.selectors";
 
 function App({ setCurrentUser, currentUser }) {
   useEffect(() => {
@@ -37,17 +39,19 @@ function App({ setCurrentUser, currentUser }) {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="shop" element={<ShopPage />} />
-        <Route exact path="/signin"  element={
-          currentUser ? <Navigate to="/" /> : <SignInAndSignUpPage />
-        }/>
+        <Route
+          exact
+          path="/signin"
+          element={currentUser ? <Navigate to="/" /> : <SignInAndSignUpPage />}
+        />
       </Routes>
     </div>
   );
 }
 
-const mapToStateProps = ({user}) => ({
-  currentUser: user.currentUser
-})
+const mapToStateProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 
 const mapToDispatch = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
