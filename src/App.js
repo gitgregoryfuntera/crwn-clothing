@@ -4,7 +4,10 @@ import Header from "./components/header/header.component";
 import HomePage from "./pages/home/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckoutPage from "./pages/checkout/checkoutpage.component";
+
 import { useEffect } from "react";
+
 import { auth, createFirebaseUser } from "./firebase/firebase.utils";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/users/user.actions";
@@ -39,6 +42,7 @@ function App({ setCurrentUser, currentUser }) {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="shop" element={<ShopPage />} />
+        <Route exact path="checkout" element={<CheckoutPage />} />
         <Route
           exact
           path="/signin"
